@@ -3,7 +3,9 @@ import random #библиотека которая позволяет генер
 # Считывает слова из файла(file)
 def get_words(file):
     with open(file,"r") as f:
-        words = f.readlines()
+        words = f.read().split("\n")
+        if words[-1] == "":
+            words = words[:-1]
     return words
 
 
@@ -40,7 +42,8 @@ def user_answer(line):
 # основная main-функция
 def main(f_trash,f_good,f_words):
     words = get_words(f_words)
-    line = (generate_line(words,3))
+    len_line = int(input("Введите фразу какой длинны вы хотите сгенерировать: "))
+    line = generate_line(words,len_line)
     if user_answer(line):
         push_line(line,f_good)
     else:
@@ -49,9 +52,8 @@ def main(f_trash,f_good,f_words):
 
 # Для теста
 # f_trash, f_good, f_words - файлы с которыми работаем
-f_trash = "/Users/robert/Documents/SortedText/SortedText/trash.txt"
-f_good = "/Users/robert/Documents/SortedText/SortedText/good.txt"
-f_words = "/Users/robert/Documents/SortedText/SortedText/words.txt"
+f_trash = "SortedText/trash.txt"
+f_good = "SortedText/good.txt"
+f_words = "SortedText/words.txt"
 
-for i in range(1,10):
-    main(f_trash,f_good,f_words)
+main(f_trash,f_good,f_words)
