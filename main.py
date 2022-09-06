@@ -1,4 +1,4 @@
-import random
+import random #библиотека которая позволяет генерировать случайные фразы
 
 # Считывает слова из файла(file)
 def get_words(file):
@@ -24,6 +24,7 @@ def push_line(line,file):
             print("Предложение успешно записано.")
             f.write(out)
 
+# Получает ответ пользователя подходит ли ему предложение (line), возвращает ответ в бинарном виде (1,0)
 def user_answer(line):
     print(line)
     print("Подходит данная фраза? (Y/N)")
@@ -36,13 +37,7 @@ def user_answer(line):
         print("Неверно указан ответ попробуйте еще раз.")
         user_answer(line)
 
-
-
-f_trash = "trash.txt"
-f_good = "good.txt"
-words = ['hai','goodbye','love','you','I']
-
-
+# основная main-функция
 def main(f_trash,f_good,f_words):
     words = get_words(f_words)
     line = (generate_line(words,3))
@@ -52,3 +47,11 @@ def main(f_trash,f_good,f_words):
         push_line(line,f_trash)
     print("-----------------")
 
+# Для теста
+# f_trash, f_good, f_words - файлы с которыми работаем
+f_trash = "/Users/robert/Documents/SortedText/SortedText/trash.txt"
+f_good = "/Users/robert/Documents/SortedText/SortedText/good.txt"
+f_words = "/Users/robert/Documents/SortedText/SortedText/words.txt"
+
+for i in range(1,10):
+    main(f_trash,f_good,f_words)
