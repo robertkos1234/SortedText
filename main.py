@@ -11,7 +11,7 @@ def get_words(file):
     return words
 
 
-# Получаем ответ по длинне слова
+# Получаем ответ по длинне слова (Не используется)
 def get_lenght(len_words):
     try:
         len_line = int(input("Введите длину фразы которою вы хотите сгенерировать: "))
@@ -81,12 +81,16 @@ def push_line(line, file):
 # Получает ответ пользователя подходит ли ему предложение (line), возвращает ответ в бинарном виде (True,False)
 def user_answer(line):
     print(line)
-    print("Подходит данная фраза? (Y/N)")
+    print("Подходит данная фраза? (Y/N/Q)")
     answ = input()
-    if answ == "Y":
+    answ = answ.lower()
+    if answ == "y":
         return True
-    elif answ == "N":
+    elif answ == "n":
         return False
+    elif answ == "q":
+        print("Завершение программы...")
+        exit()
     else:
         print("Неверно указан ответ попробуйте еще раз.")
         user_answer(line)
@@ -95,7 +99,6 @@ def user_answer(line):
 # основная main-функция
 def main(f_trash, f_good, f_words, lenght):
     words = get_words(f_words)
-    # lenght = get_lenght(len(words))
     if check_all_line(f_trash, f_good, len(words), lenght):
         print("Все возможные фразы уже сгенерированны!")
     else:
@@ -113,6 +116,7 @@ f_trash = "SortedText/trash.txt"  # Файл с подходящими фраз�
 f_good = "SortedText/good.txt"  # Файл с неподходящими фразами
 f_words = "SortedText/words.txt"  # Файл с исходными словами
 lenght = 2  # Длина фразы
+k = 10 # Количество фраз которое нужно сгенерировать
 
-for i in range(20):
+for i in range(k):
     main(f_trash, f_good, f_words, lenght)
